@@ -8,7 +8,7 @@ export const startApp = () => {
       <label for="search_input_box">Search by Movie Name:</label>
       
       <div class="search_input_container">
-        <input id="search_input_box" type="text" placeholder="Search by Movie Name..." />
+        <input id="search_input_box" type="text" placeholder="Search by Movie Name... Example: Thor" />
         <button id="clear_search">x</button>
       </div> 
     </form>

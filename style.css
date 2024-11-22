@@ -103,10 +103,6 @@ ul li {
   z-index: 1;
 }
 
-footer {
-  grid-area: footer;
-}
-
 .search_result_dropdown_list .search_movie_list_item {
   color: #fff;
   cursor: pointer;
@@ -150,6 +146,25 @@ footer {
 
 .hide_search_result_dropdown_list {
   display: none;
+}
+
+footer {
+  grid-area: footer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+footer a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+footer img {
+  height: 50px;
+  width: 50px;
 }
 
 /* Media query for desktop */
