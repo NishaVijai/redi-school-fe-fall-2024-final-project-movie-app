@@ -1,6 +1,6 @@
-import { displayMovieList } from "./displayMovieList.js";
+import { displaySearchResultMovieList } from "./displaySearchResultMovieList.js";
 
-export const getMovieAPIdata = async (inputValue) => {
+export const getSearchResultMovieData = async (inputValue) => {
   const apiUrl = import.meta.env.VITE_API_URL;
   const apiKey = import.meta.env.VITE_API_KEY;
 
@@ -8,5 +8,5 @@ export const getMovieAPIdata = async (inputValue) => {
   const res = await fetch(`${URL}`);
   const data = await res.json();
 
-  if (data.Response == "True") displayMovieList(data.Search);
+  if (data.Response == "True") displaySearchResultMovieList(data.Search);
 };

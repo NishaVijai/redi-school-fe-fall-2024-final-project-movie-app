@@ -1,4 +1,4 @@
-import { getMovieAPIdata } from "./getMovieAPIdata";
+import { getSearchResultMovieData } from "./getSearchResultMovieData";
 
 export const startApp = () => {
   const mainContainer = document.getElementById("main");
@@ -28,7 +28,7 @@ export const startApp = () => {
 
     if (searchInputValue.length > 0) {
       searchResultDropdownList.classList.remove("hide_search_result_dropdown_list");
-      getMovieAPIdata(searchInputValue);
+      getSearchResultMovieData(searchInputValue);
     }
     else {
       searchResultDropdownList.classList.add("hide_search_result_dropdown_list");

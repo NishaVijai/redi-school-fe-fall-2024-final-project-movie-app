@@ -1,7 +1,7 @@
 import noImage from "./assets/images/missingImage.svg";
-import { getMovieDetails } from "./getMovieDetails.js";
+import { getSearchResultMovieDetails } from "./getSearchResultMovieDetails.js";
 
-export const displayMovieList = (movieLists) => {
+export const displaySearchResultMovieList = (movieLists) => {
   const searchResultDropdownList = document.querySelector(".search_result_dropdown_list");
 
   searchResultDropdownList.innerHTML = "";
@@ -38,5 +38,5 @@ export const displayMovieList = (movieLists) => {
     searchResultDropdownList.appendChild(movieListItem);
   };
 
-  getMovieDetails();
+  getSearchResultMovieDetails();
 };

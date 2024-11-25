@@ -1,6 +1,6 @@
-import { displayMovieDetails } from "./displayMovieDetails.js";
+import { displaySearchResultMovieDetails } from "./displaySearchResultMovieDetails.js";
 
-export const getMovieDetails = () => {
+export const getSearchResultMovieDetails = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
   const apiKey = import.meta.env.VITE_API_KEY;
 
@@ -19,7 +19,7 @@ export const getMovieDetails = () => {
       const result = await fetch(URL);
       const movieDetails = await result.json();
 
-      displayMovieDetails(movieDetails);
+      displaySearchResultMovieDetails(movieDetails);
     });
   });
 };

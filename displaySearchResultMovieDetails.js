@@ -1,7 +1,7 @@
 import noImage from "./assets/images/missingImage.svg";
 import awardImage from "./assets/images/award2.svg";
 
-export const displayMovieDetails = (movieDetails) => {
+export const displaySearchResultMovieDetails = (movieDetails) => {
   const searchResultContainer = document.querySelector(".search_result_container");
 
   searchResultContainer.innerHTML = `
