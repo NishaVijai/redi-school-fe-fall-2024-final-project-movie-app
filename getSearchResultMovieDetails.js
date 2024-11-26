@@ -4,6 +4,8 @@ export const getSearchResultMovieDetails = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
   const apiKey = import.meta.env.VITE_API_KEY;
 
+  const searchResultContainer = document.querySelector(".search_result_container");
+
   const searchResultDropdownList = document.querySelector(".search_result_dropdown_list");
   const searchResultMoviesList = searchResultDropdownList.querySelectorAll(".search_movie_list_item");
 
@@ -11,6 +13,7 @@ export const getSearchResultMovieDetails = () => {
 
   searchResultMoviesList.forEach(movie => {
     movie.addEventListener("click", async () => {
+      searchResultContainer.classList.remove("hide_search_result_dropdown_list");
       searchResultDropdownList.classList.add("hide_search_result_dropdown_list");
 
       // searchInput.value = "";

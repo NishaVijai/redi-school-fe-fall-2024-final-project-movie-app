@@ -6,8 +6,20 @@ const appDiv = document.getElementById("app");
 
 appDiv.innerHTML = `
   <header>
-    <h1>Movie Details API search App</h1>
-    <p>Search by movie name to read more details about the movie</p>
+    <nav>
+      <ul id="nav-tab">
+        <li class="active"><a href="">Home</a></li>
+        <li><a href="#displayMovies">Display Movies</a></li>
+        <li><a href="#movieDetails">Movie Details</a></li>
+        <li><a href="#">Seen</a></li>
+        <li><a href="#">Watch Later</a></li>
+      </ul>
+    </nav>
+
+    <section>
+      <h1>Movie Details API search App</h1>
+      <p>Search by movie name to read more details about the movie</p>
+    </section>
   </header>
 
   <main id="main">

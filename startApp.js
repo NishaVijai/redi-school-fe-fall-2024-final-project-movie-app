@@ -1,4 +1,5 @@
-import { getSearchResultMovieData } from "./getSearchResultMovieData";
+import { getSearchResultMovieList } from "./getSearchResultMovieList.js";
+import { getRandomMovieDataFromAPI } from "./getRandomMovieDataFromAPI.js";
 
 export const startApp = () => {
   const mainContainer = document.getElementById("main");
@@ -15,35 +16,56 @@ export const startApp = () => {
 
     <div class="search_result_dropdown_list"></div>
 
-    <div class="search_result_container"></div>
+    <div id="displayMovies" class="display_movie_list_container"></div>
+
+    <div id="movieDetails" class="search_result_container"></div>
   `;
 
   const searchInput = document.getElementById("search_input_box");
   const clearSearchInput = document.getElementById("clear_search");
   const searchResultDropdownList = document.querySelector(".search_result_dropdown_list");
+  const displayMovieListContainer = document.querySelector(".display_movie_list_container");
+  const searchResultContainer = document.querySelector(".search_result_container");
   const searchFormControl = document.querySelector(".search_form_control");
 
-  function searchMoviesList() {
-    let searchInputValue = (searchInput.value).trim();
+  let searchInputValue;
+
+  const hideElements = () => {
+    searchResultContainer.innerHTML = "";
+    searchResultContainer.classList.add("hide_search_result_dropdown_list");
+  };
+
+  const showElements = () => {
+    searchResultContainer.innerHTML = "";
+    displayMovieListContainer.classList.remove("hide_search_result_dropdown_list");
+  };
+
+  const searchMoviesList = () => {
+    searchInputValue = (searchInput.value).trim();
 
     if (searchInputValue.length > 0) {
       searchResultDropdownList.classList.remove("hide_search_result_dropdown_list");
-      getSearchResultMovieData(searchInputValue);
+      displayMovieListContainer.classList.add("hide_search_result_dropdown_list");
+      searchResultContainer.classList.add("hide_search_result_dropdown_list");
+      getSearchResultMovieList(searchInputValue);
+      return searchInputValue;
     }
-    else {
-      searchResultDropdownList.classList.add("hide_search_result_dropdown_list");
-    }
-  }
+  };
 
   const clearSearchInputField = () => {
-    searchInput.value = "";
+    if (searchInputValue.length > 0) {
+      searchInput.value = "";
+      // hideElements();
+      showElements();
+    }
   };
 
   searchInput.addEventListener("keyup", () => {
     searchMoviesList();
   });
 
-  clearSearchInput.addEventListener("click", () => {
+  clearSearchInput.addEventListener("click", (e) => {
+    e.preventDefault();
     clearSearchInputField();
   });
 
@@ -52,4 +74,6 @@ export const startApp = () => {
       searchResultDropdownList.classList.add("hide_search_result_dropdown_list");
     }
   });
+
+  getRandomMovieDataFromAPI();
 };
