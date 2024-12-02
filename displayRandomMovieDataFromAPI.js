@@ -67,6 +67,7 @@ export const displayRandomMovieDataFromAPI = (movieLists) => {
 
     favouritesButton.addEventListener('click', (e) => {
       e.preventDefault();
+      e.stopPropagation();
 
       if (!savedMovieIds.includes(movieListItem.dataset.id)) {
         savedMovieIds.push(movieListItem.dataset.id);
