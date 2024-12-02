@@ -1,19 +1,19 @@
 import "./style.css";
 import github from "./assets/images/github.svg";
 import { startApp } from "./startApp.js";
+import Router from "./Router.js";
 
 const appDiv = document.getElementById("app");
+{/* <a class="nav_link" href="/liked">Liked</a>
+<a class="nav_link" href="/watchLater">Watch Later</a> */}
 
 appDiv.innerHTML = `
   <header>
-    <nav>
-      <ul id="nav-tab">
-        <li class="active"><a href="">Home</a></li>
-        <li><a href="#displayMovies">Display Movies</a></li>
-        <li><a href="#movieDetails">Movie Details</a></li>
-        <li><a href="#">Seen</a></li>
-        <li><a href="#">Watch Later</a></li>
-      </ul>
+    <nav id="nav-tab">
+      <a class="nav_link" href="/">Home</a>
+      <a class="nav_link" href="/movieDetails">Recent Movie Details</a>
+      <a class="nav_link" href="/favourites">Favourites</a>
+      <a class="nav_link" href="/movieDetailsHistory">Movie Details History</a>
     </nav>
 
     <section>
@@ -38,4 +38,10 @@ const getFullYear = () => new Date().getFullYear();
 const footerYear = document.getElementById('footer_year');
 footerYear.textContent = getFullYear();
 
-startApp();
+window.app = {};
+app.router = Router;
+
+window.addEventListener("DOMContentLoaded", () => {
+  startApp();
+  app.router.init();
+});

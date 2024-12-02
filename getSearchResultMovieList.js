@@ -5,8 +5,13 @@ export const getSearchResultMovieList = async (inputValue) => {
   const apiKey = import.meta.env.VITE_API_KEY;
 
   const URL = `${apiUrl}?s=${inputValue}&page=1&apikey=${apiKey}`;
-  const res = await fetch(`${URL}`);
-  const data = await res.json();
 
-  if (data.Response == "True") displaySearchResultMovieList(data.Search);
+  const loaderInfiniteSpinnerSVG = document.querySelector(".loader_infinite_spinner");
+
+  loaderInfiniteSpinnerSVG.classList.remove("hide_loader_infinite_spinner");
+
+  await fetch(URL).then(response => response.json()).then(data => {
+    loaderInfiniteSpinnerSVG.classList.add("hide_loader_infinite_spinner");
+    if (data.Response == "True") displaySearchResultMovieList(data.Search);
+  });
 };
