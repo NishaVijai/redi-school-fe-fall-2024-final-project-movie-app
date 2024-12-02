@@ -38,6 +38,8 @@ const getFullYear = () => new Date().getFullYear();
 const footerYear = document.getElementById('footer_year');
 footerYear.textContent = getFullYear();
 
+// startApp();
+
 window.app = {};
 app.router = Router;
 
