@@ -4,7 +4,6 @@ import awardImage from "./assets/images/award2.svg";
 export const displayMovieDetailsHistory = (movieDetails) => {
   const movieDetailsHistoryContainer = document.querySelector(".movie_details_history_container");
 
-  // searchResultContainer.innerHTML = "";
   movieDetailsHistoryContainer.innerHTML += `
   <div>
     <div class="search_result_container_movie_poster">
