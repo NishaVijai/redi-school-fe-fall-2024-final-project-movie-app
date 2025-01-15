@@ -100,5 +100,5 @@ export const startApp = () => {
     if (e.target !== e.currentTarget) return;
   });
 
-  getRandomMovieDataFromAPI(displayMovieListContainer, "The Help", displayMovieListContainer);
+  getRandomMovieDataFromAPI(displayMovieListContainer, "Avengers", displayMovieListContainer);
 };
