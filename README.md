@@ -4,7 +4,7 @@
 https://movie-details-api-search.netlify.app/
 
 ## Screenshot
-![Movie Details API search App](https://github.com/user-attachments/assets/00d2daef-f833-4597-8562-7589b495aa26)
+![MovieDetailsAPIsearchAppNew](https://github.com/user-attachments/assets/63732d14-f164-49d8-9aca-09070e27b227)
 
 ## Run project locally
  - npm install
