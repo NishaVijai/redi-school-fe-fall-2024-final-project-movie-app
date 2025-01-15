@@ -4,14 +4,12 @@ import { startApp } from "./startApp.js";
 import Router from "./Router.js";
 
 const appDiv = document.getElementById("app");
-{/* <a class="nav_link" href="/liked">Liked</a>
-<a class="nav_link" href="/watchLater">Watch Later</a> */}
 
 appDiv.innerHTML = `
   <header>
     <nav id="nav-tab">
       <a class="nav_link" href="/">Home</a>
-      <a class="nav_link" href="/movieDetails">Recent Movie Details</a>
+      <a class="nav_link" href="/recentMovieDetails">Recent Movie Details</a>
       <a class="nav_link" href="/favourites">Favourites</a>
       <a class="nav_link" href="/movieDetailsHistory">Movie Details History</a>
     </nav>

@@ -1,48 +1,18 @@
-import noImage from "./assets/images/missingImage.svg";
-import awardImage from "./assets/images/award2.svg";
+import { createMovieDetailsComponent } from "./createMovieDetailsComponent.js";
+import { displayRecentMovieDetail } from "./displayRecentMovieDetail.js";
 
 export const displayMovieDetailsHistory = (movieDetails) => {
   const movieDetailsHistoryContainer = document.querySelector(".movie_details_history_container");
+  const displayRecentMovieDetailsItem = movieDetailsHistoryContainer.querySelectorAll(".search_result_item");
 
-  movieDetailsHistoryContainer.innerHTML += `
-  <div>
-    <div class="search_result_container_movie_poster">
-      <img src="${(movieDetails.Poster != "N/A") ? movieDetails.Poster : noImage}" alt="poster">
-    </div>
+  let searchResultItem = document.createElement("div");
+  searchResultItem.classList.add("search_result_item");
 
-    <section class="search_result_container_movie_info">
-      <h3 class="search_result_container_movie_title">${movieDetails.Title}</h3>
+  createMovieDetailsComponent(searchResultItem, movieDetails);
 
-      <ul class="search_result_container_movie_misc_info">
-          <li class="year">Year: ${movieDetails.Year}</li>
-          <li class="ratings">Ratings: ${movieDetails.Rated}</li>
-          <li class="released">Released: ${movieDetails.Released}</li>
-      </ul>
+  movieDetailsHistoryContainer.insertBefore(searchResultItem, movieDetailsHistoryContainer.firstChild);
 
-      <p class="genre">
-        <b>Genre:</b> ${movieDetails.Genre}
-      </p>
-
-      <p class="writer">
-        <b>Writer:</b> ${movieDetails.Writer}
-      </p>
-
-      <p class="actors">
-        <b>Actors: </b>${movieDetails.Actors}
-      </p>
-
-      <p class="plot">
-        <b>Plot:</b> ${movieDetails.Plot}
-      </p>
-
-      <p class="language">
-        <b>Language:</b> ${movieDetails.Language}
-      </p>
-
-      <p class="awards">
-        <img src="${awardImage}" alt="Trophy"> ${movieDetails.Awards}
-      </p>
-    </section>
-  </div>
-  `;
+  if (displayRecentMovieDetailsItem.length > 0) {
+    displayRecentMovieDetail(movieDetails);
+  }
 };

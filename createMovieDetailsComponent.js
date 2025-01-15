@@ -1,15 +1,12 @@
 import noImage from "./assets/images/missingImage.svg";
 import awardImage from "./assets/images/award2.svg";
+export const createMovieDetailsComponent = (htmlContainer, movieDetails) => {
+  htmlContainer.innerHTML += `
+    <div class="search_result_container_movie_poster">
+      <img src="${(movieDetails.Poster != "N/A") ? movieDetails.Poster : noImage}" alt="poster">
+    </div>
 
-export const displaySearchResultMovieDetails = (movieDetails) => {
-  const searchResultContainer = document.querySelector(".movie_details_container");
-
-  searchResultContainer.innerHTML = `
-  <div class="search_result_container_movie_poster">
-    <img src="${(movieDetails.Poster != "N/A") ? movieDetails.Poster : noImage}" alt="poster">
-  </div>
-
-  <section class="search_result_container_movie_info">
+    <section class="search_result_container_movie_info">
       <h3 class="search_result_container_movie_title">${movieDetails.Title}</h3>
 
       <ul class="search_result_container_movie_misc_info">
@@ -41,6 +38,5 @@ export const displaySearchResultMovieDetails = (movieDetails) => {
       <p class="awards">
         <img src="${awardImage}" alt="Trophy"> ${movieDetails.Awards}
       </p>
-  </section>
-  `;
+    </section>`;
 };
