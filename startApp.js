@@ -28,7 +28,7 @@ export const startApp = () => {
     <div id="movieDetails" class="movie_details_container"></div>
 
     <div>
-      <button id="goToTop">Go to Top</button>
+      <button id="goToTop">Scroll to Top</button>
     </div>
   `;
 
