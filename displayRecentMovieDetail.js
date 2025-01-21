@@ -1,7 +1,7 @@
 import { createMovieDetailsComponent } from "./createMovieDetailsComponent.js";
 export const displayRecentMovieDetail = (movieDetails) => {
-  const recentMovieDetailsContainer = document.querySelector(".recent_movie_details_container");
+  const displayRecentMovieDetailsList = document.querySelector(".display_recent_movie_details_list");
 
-  recentMovieDetailsContainer.innerHTML = "";
-  createMovieDetailsComponent(recentMovieDetailsContainer, movieDetails);
+  displayRecentMovieDetailsList.innerHTML = "";
+  createMovieDetailsComponent(displayRecentMovieDetailsList, movieDetails);
 };

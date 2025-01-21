@@ -1,6 +1,8 @@
 import noImage from "./assets/images/missingImage.svg";
 import { displayFavouritesMovieList } from "./displayFavouritesMovieList.js";
 
+export let savedMovieIdsFromComponent = new Array();
+
 export const createMovieListComponent = (htmlContainer, movieData) => {
   let movieListItem = document.createElement('div');
   movieListItem.dataset.id = movieData.imdbID;
@@ -62,7 +64,13 @@ export const createMovieListComponent = (htmlContainer, movieData) => {
   favButton?.addEventListener('click', (e) => {
     e.stopPropagation();
 
-    favButton.classList.add("favorite_movie_button_clicked");
-    displayFavouritesMovieList(movieData);
+    if (!savedMovieIdsFromComponent.includes(movieListItem.dataset.id)) {
+      savedMovieIdsFromComponent.unshift(movieListItem.dataset.id);
+
+      if (savedMovieIdsFromComponent.length > 0) {
+        favButton.classList.add("favorite_movie_button_clicked");
+        displayFavouritesMovieList(movieData);
+      }
+    }
   });
 };

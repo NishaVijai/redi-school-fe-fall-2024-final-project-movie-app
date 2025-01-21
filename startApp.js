@@ -4,7 +4,7 @@ import { getRandomMovieDataFromAPI } from "./getRandomMovieDataFromAPI.js";
 export const startApp = () => {
   const mainContainer = document.getElementById("main");
 
-  mainContainer.innerHTML = `
+  mainContainer.innerHTML += `
     <form class="search_form_control">
       <label for="search_input_box">Search by Movie Name:</label>
       
@@ -21,9 +21,29 @@ export const startApp = () => {
     <div id="displayMovies" class="display_movie_list_container"></div>
     <div id="searchResultMovies" class="search_result_movies_container"></div>
     
-    <div id="recentMovieDetails" class="recent_movie_details_container"></div>
-    <div id="movieDetailsHistory" class="movie_details_history_container"></div>
-    <div id="displayFavouritesMovies" class="display_favourites_movie_list_container"></div>
+    <div id="recentMovieDetails" class="recent_movie_details_container">
+      <h2>Recent Movie Details</h2>
+
+      <section class="display_recent_movie_details_list">
+        <p class="recent_movie_details_list_empty_text">Recent Movie Details list is empty.</p>
+      </section>
+    </div>
+
+    <div id="movieDetailsHistory" class="movie_details_history_container">
+      <h2>Movie Details History</h2>
+
+      <section class="display_movie_details_history_list">
+        <p class="display_movie_details_history_list_empty_text">Movie Details History list is empty.</p>
+      </section>
+    </div>
+
+    <div id="displayFavouritesMovies" class="display_favourites_movie_list_container">
+      <h2>Favourite Movie List</h2>
+
+      <section class="display_favourite_movie_lists">
+        <p class="favorite_movie_list_empty_text">Favourite Movie list is empty.</p>
+      </section>
+    </div>
 
     <div id="movieDetails" class="movie_details_container"></div>
 
@@ -76,7 +96,7 @@ export const startApp = () => {
   };
 
   const scrollToTop = () => {
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    if (document.body.scrollTop > 130 || document.documentElement.scrollTop > 130) {
       goToTopButton.style.transition = "display 200ms ease-in-out";
       goToTopButton.style.display = "block";
     } else {

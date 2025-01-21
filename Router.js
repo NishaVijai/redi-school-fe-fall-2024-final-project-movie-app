@@ -1,3 +1,5 @@
+import { savedMovieIdsFromComponent } from "./createMovieListComponent.js";
+
 const Router = {
   init: () => {
     history.pushState({}, null, "/");
@@ -19,6 +21,7 @@ const Router = {
       history.pushState({ route }, null, route);
     }
 
+    const mainTitleSection = document.querySelector("#main_title_section");
     const searchFormControl = document.querySelector(".search_form_control");
     const displayMovieListContainer = document.querySelector(".display_movie_list_container");
     const displaySearchResultMovieListContainer = document.querySelector(".search_result_movies_container");
@@ -27,6 +30,7 @@ const Router = {
     const movieDetailsHistoryContainer = document.querySelector(".movie_details_history_container");
     const displayFavouritesMovieListContainer = document.querySelector(".display_favourites_movie_list_container");
     const favButtons = displayFavouritesMovieListContainer.querySelectorAll(".favorite_movie_button");
+    const favoriteMovieListEmptyText = document.querySelector(".favorite_movie_list_empty_text");
 
     const searchInput = document.getElementById("search_input_box");
 
@@ -38,6 +42,7 @@ const Router = {
 
     const addElement = (content) => {
       if (content === "Home") {
+        mainTitleSection.classList.remove("hide_element");
         displayMovieListContainer.classList.remove("hide_element");
         displaySearchResultMovieListContainer.classList.add("hide_element");
         searchFormControl.classList.remove("hide_element");
@@ -53,6 +58,7 @@ const Router = {
       }
 
       if (content === "Recent Movie Details") {
+        mainTitleSection.classList.add("hide_element");
         searchFormControl.classList.add("hide_element");
         displayMovieListContainer.classList.add("hide_element");
         displaySearchResultMovieListContainer.classList.add("hide_element");
@@ -63,6 +69,7 @@ const Router = {
       }
 
       if (content === "Movie Details History") {
+        mainTitleSection.classList.add("hide_element");
         searchFormControl.classList.add("hide_element");
         displayMovieListContainer.classList.add("hide_element");
         displaySearchResultMovieListContainer.classList.add("hide_element");
@@ -73,14 +80,21 @@ const Router = {
       }
 
       if (content === "Favourites") {
+        mainTitleSection.classList.add("hide_element");
         searchFormControl.classList.add("hide_element");
         displayMovieListContainer.classList.add("hide_element");
         displaySearchResultMovieListContainer.classList.add("hide_element");
         movieDetailsContainer.classList.add("hide_element");
         recentMovieDetailsContainer.classList.add("hide_element");
         movieDetailsHistoryContainer.classList.add("hide_element");
+        favoriteMovieListEmptyText.classList.add("hide_element");
         displayFavouritesMovieListContainer.classList.remove("hide_element");
+
         favButtons.forEach(favButton => favButton.classList.add("favorite_movie_button_clicked"));
+
+        if (savedMovieIdsFromComponent.length === 0) {
+          favoriteMovieListEmptyText.classList.remove("hide_element");
+        }
       }
 
       window.scrollX = 0;

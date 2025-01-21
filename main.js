@@ -13,15 +13,13 @@ appDiv.innerHTML = `
       <a class="nav_link" href="/favourites">Favourites</a>
       <a class="nav_link" href="/movieDetailsHistory">Movie Details History</a>
     </nav>
-
-    <section>
-      <h1>Movie Details API search App</h1>
-      <p>Search by movie name to read more details about the movie</p>
-    </section>
   </header>
 
   <main id="main">
-
+    <section id="main_title_section">
+      <h1>Movie Details API search App</h1>
+      <p>Search by movie name to read more details about the movie</p>
+    </section>
   </main>
 
   <footer>

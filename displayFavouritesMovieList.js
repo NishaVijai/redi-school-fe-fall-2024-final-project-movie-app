@@ -1,7 +1,7 @@
 import { createMovieListComponent } from "./createMovieListComponent.js";
 
 export const displayFavouritesMovieList = (movieDetails) => {
-  const displayFavouritesMovieListContainer = document.querySelector(".display_favourites_movie_list_container");
+  const displayFavouriteMovieLists = document.querySelector(".display_favourite_movie_lists");
 
-  createMovieListComponent(displayFavouritesMovieListContainer, movieDetails);
+  createMovieListComponent(displayFavouriteMovieLists, movieDetails);
 };
