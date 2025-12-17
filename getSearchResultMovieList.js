@@ -11,7 +11,7 @@ export const getSearchResultMovieList = async (inputValue) => {
   const loaderInfiniteSpinnerSVG = document.querySelector(".loader_infinite_spinner");
 
   loaderInfiniteSpinnerSVG.classList.remove("hide_loader_infinite_spinner");
-  loaderInfiniteSpinnerSVG.scrollIntoView();
+  // loaderInfiniteSpinnerSVG.scrollIntoView();
 
   await fetch(URL).then(response => response.json()).then(data => {
     if (data.Response == "True") {

@@ -1,4 +1,4 @@
-import infiniteSpinner from "./assets/images/infinite-spinner.svg";
+import infiniteSpinner from "./public/assets/images/infinite-spinner.svg";
 import { getRandomMovieDataFromAPI } from "./getRandomMovieDataFromAPI.js";
 
 export const startApp = () => {
@@ -18,8 +18,13 @@ export const startApp = () => {
       <img src="${infiniteSpinner}" alt="Infinite Spinner SVG">
     </div>
 
-    <div id="displayMovies" class="display_movie_list_container"></div>
-    <div id="searchResultMovies" class="search_result_movies_container"></div>
+    <div id="displayMovies" class="display_movie_list_container">
+      <h2>Default Movie List</h2>
+    </div>
+
+    <div id="searchResultMovies" class="search_result_movies_container">
+      <h2>Searched Movie Result</h2>
+    </div>
     
     <div id="recentMovieDetails" class="recent_movie_details_container">
       <h2>Recent Movie Details</h2>

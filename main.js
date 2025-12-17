@@ -1,5 +1,5 @@
 import "./style.css";
-import github from "./assets/images/github.svg";
+import github from "./public/assets/images/github.svg";
 import { startApp } from "./startApp.js";
 import Router from "./Router.js";
 
@@ -25,7 +25,7 @@ appDiv.innerHTML = `
   <footer>
     <p>Copyright &copy; 2024 - <span id="footer_year"></span></p>
 
-    <a href="https://github.com/NishaVijai/redi-school-fe-fall-2024-final-project-movie-app" target="_blank" rel="noopener noreferrer" title="GitHub Repo project link will open on a new tab"> <img src="${github}"> GitHub Repo Link</a>
+    <a href="https://github.com/NishaVijai/redi-school-fe-fall-2024-final-project-movie-app" target="_blank" rel="noopener noreferrer" title="GitHub Repo project link will open on a new tab"> <img src="${github}" alt="GitHub Logo"> GitHub Repo Link</a>
   </footer>
 `;
 

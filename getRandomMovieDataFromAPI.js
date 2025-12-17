@@ -10,7 +10,7 @@ export const getRandomMovieDataFromAPI = async (htmlContainer, inputValue, htmlP
   const URL = `${apiUrl}?s=${inputValue}&page=1?&apikey=${apiKey}`;
 
   loaderInfiniteSpinnerSVG.classList.remove("hide_loader_infinite_spinner");
-  loaderInfiniteSpinnerSVG.scrollIntoView();
+  // loaderInfiniteSpinnerSVG.scrollIntoView();
 
   await fetch(URL).then(response => response.json()).then(data => {
     if (data.Response == "True") {

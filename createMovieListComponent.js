@@ -1,26 +1,18 @@
-import noImage from "./assets/images/missingImage.svg";
+import noImage from "./public/assets/images/missingImage.svg";
 import { displayFavouritesMovieList } from "./displayFavouritesMovieList.js";
 
-export let savedMovieIdsFromComponent = new Array();
+export let savedMovieIdsFromComponent = [];
 
 export const createMovieListComponent = (htmlContainer, movieData) => {
-  let movieListItem = document.createElement('div');
+  const movieListItem = document.createElement('div');
   movieListItem.dataset.id = movieData.imdbID;
   movieListItem.classList.add("display_movie_list_item");
 
-  let moviePoster;
-
-  if (movieData.Poster != "N/A") {
-    moviePoster = movieData.Poster;
-  }
-  else {
-    moviePoster = noImage;
-  }
-
-  let buttonContainerDiv = document.createElement('div');
+  // ---------- Button Container ----------
+  const buttonContainerDiv = document.createElement('div');
   buttonContainerDiv.classList.add("button_container_div");
 
-  let favouritesButton = document.createElement('button');
+  const favouritesButton = document.createElement('button');
   favouritesButton.id = "favourites";
   favouritesButton.type = "button";
   favouritesButton.textContent = "Favourite";
@@ -29,46 +21,59 @@ export const createMovieListComponent = (htmlContainer, movieData) => {
   buttonContainerDiv.appendChild(favouritesButton);
   movieListItem.appendChild(buttonContainerDiv);
 
-  let imageContainerDiv = document.createElement('div');
+  // ---------- Image Container ----------
+  const imageContainerDiv = document.createElement('div');
   imageContainerDiv.classList.add("movie_list_item_image");
 
-  let imageElement = document.createElement("img");
-  imageElement.src = `${moviePoster}`;
-  imageElement.alt = `${movieData.Title}`;
+  const imageElement = document.createElement("img");
+  imageElement.alt = movieData.Title;
+
+  // Set poster URL with fallback for "N/A"
+  imageElement.src = movieData.Poster && movieData.Poster !== "N/A"
+    ? movieData.Poster
+    : noImage;
+
+  // Handle broken / 404 URLs
+  imageElement.onerror = function () {
+    this.onerror = null; // prevent infinite loop
+    this.src = noImage;
+  };
 
   imageContainerDiv.appendChild(imageElement);
   movieListItem.appendChild(imageContainerDiv);
 
-  let titleContainerDiv = document.createElement('div');
+  // ---------- Title Container ----------
+  const titleContainerDiv = document.createElement('div');
   titleContainerDiv.classList.add("movie_list_item_title");
 
-  let h3Element = document.createElement("h3");
-  h3Element.textContent = `${movieData.Title}`;
+  const h3Element = document.createElement("h3");
+  h3Element.textContent = movieData.Title;
 
   titleContainerDiv.appendChild(h3Element);
   movieListItem.appendChild(titleContainerDiv);
 
-  let yearContainerDiv = document.createElement('div');
+  // ---------- Year Container ----------
+  const yearContainerDiv = document.createElement('div');
   yearContainerDiv.classList.add("movie_list_item_year");
 
-  let pElement = document.createElement("p");
-  pElement.textContent = `${movieData.Year}`;
+  const pElement = document.createElement("p");
+  pElement.textContent = movieData.Year;
 
   yearContainerDiv.appendChild(pElement);
   movieListItem.appendChild(yearContainerDiv);
 
+  // Insert movie item at the top
   htmlContainer.insertBefore(movieListItem, htmlContainer.firstChild);
 
-  let favButton = htmlContainer.querySelector(".favorite_movie_button");
-
-  favButton?.addEventListener('click', (e) => {
+  // ---------- Favourite Button Logic ----------
+  favouritesButton.addEventListener('click', (e) => {
     e.stopPropagation();
 
     if (!savedMovieIdsFromComponent.includes(movieListItem.dataset.id)) {
       savedMovieIdsFromComponent.unshift(movieListItem.dataset.id);
 
       if (savedMovieIdsFromComponent.length > 0) {
-        favButton.classList.add("favorite_movie_button_clicked");
+        favouritesButton.classList.add("favorite_movie_button_clicked");
         displayFavouritesMovieList(movieData);
       }
     }
