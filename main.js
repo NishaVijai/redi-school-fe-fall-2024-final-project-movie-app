@@ -17,8 +17,8 @@ appDiv.innerHTML = `
 
   <main id="main">
     <section id="main_title_section">
-      <h1>Movie Details API search App</h1>
-      <p>Search by movie name to read more details about the movie</p>
+      <h1>OpenMovie Search</h1>
+      <p>Search. Discover. Explore movies instantly.</p>
     </section>
   </main>
 
