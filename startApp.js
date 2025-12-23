@@ -19,36 +19,34 @@ export const startApp = () => {
     </div>
 
     <div id="displayMovies" class="display_movie_list_container">
-      <h2>Default Movie List</h2>
     </div>
 
     <div id="searchResultMovies" class="search_result_movies_container">
-      <h2>Searched Movie Result</h2>
     </div>
     
-    <div id="recentMovieDetails" class="recent_movie_details_container">
+    <section id="recentMovieDetails" class="recent_movie_details_container">
       <h2>Recent Movie Details</h2>
 
-      <section class="display_recent_movie_details_list">
+      <div class="display_recent_movie_details_list">
         <p class="recent_movie_details_list_empty_text">Recent Movie Details list is empty.</p>
-      </section>
-    </div>
+      </div>
+    </section>
 
-    <div id="movieDetailsHistory" class="movie_details_history_container">
+    <section id="movieDetailsHistory" class="movie_details_history_container">
       <h2>Movie Details History</h2>
 
-      <section class="display_movie_details_history_list">
+      <div class="display_movie_details_history_list">
         <p class="display_movie_details_history_list_empty_text">Movie Details History list is empty.</p>
-      </section>
-    </div>
+      </div>
+    </section>
 
-    <div id="displayFavouritesMovies" class="display_favourites_movie_list_container">
+    <section id="displayFavouritesMovies" class="display_favourites_movie_list_container">
       <h2>Favourite Movie List</h2>
 
-      <section class="display_favourite_movie_lists">
+      <div class="display_favourite_movie_lists">
         <p class="favorite_movie_list_empty_text">Favourite Movie list is empty.</p>
-      </section>
-    </div>
+      </div>
+    </section>
 
     <div id="movieDetails" class="movie_details_container"></div>
 
