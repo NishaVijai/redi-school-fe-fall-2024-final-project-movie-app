@@ -31,26 +31,33 @@ export const fetchMovieList = async (
 
     showLoader();
 
-    // // Clear the container before adding new results
-    // targetContainer.innerHTML = "";
+    // ✅ Always clear previous content first
+    targetContainer.innerHTML = "";
 
     const response = await fetch(URL);
     const data = await response.json();
 
-    if (data.Response === "True") {
-      // // Limit to max 10 movies
-      // const limitedMovies = data.Search.slice(0, 10);
+    if (data.Response === "True" && Array.isArray(data.Search)) {
+      // ✅ Limit to max 10 movies
+      const limitedMovies = data.Search.slice(0, 10);
 
       displayMovieListComponent(
         targetContainer,
-        data.Search,
-        // limitedMovies,
+        limitedMovies,
         parentContainer
       );
+
       document.querySelector("header")?.scrollIntoView();
+    } else {
+      // ✅ Show message ONLY when no results
+      targetContainer.innerHTML = "<p>No movies found.</p>";
     }
   } catch (error) {
     console.error("Failed to fetch movie list:", error);
+
+    // ✅ Friendly error message
+    targetContainer.innerHTML =
+      "<p>Something went wrong. Please try again.</p>";
   } finally {
     hideLoader();
   }
