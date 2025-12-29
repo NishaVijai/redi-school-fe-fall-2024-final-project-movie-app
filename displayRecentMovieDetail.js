@@ -1,6 +1,5 @@
 // src/components/displayRecentMovieDetail.js
 import { createMovieDetailsComponent } from "./createMovieDetailsComponent.js";
-import { renderMovies } from "./src/utils/display.js";
 
 export const displayRecentMovieDetail = (movie) => {
   const container = document.querySelector(".display_recent_movie_details_list");
@@ -14,6 +13,6 @@ export const displayRecentMovieDetail = (movie) => {
     emptyText.classList.add("hide_element");
   }
 
-  // Render only the current movie (no prepend, just add)
-  renderMovies(createMovieDetailsComponent, container, movie, { prepend: false });
+  // Render only the current movie
+  createMovieDetailsComponent(container, movie);
 };

@@ -1,11 +1,7 @@
 // src/utils/dom.js
 export const dom = {
   main: () => document.getElementById("main"),
-
-  // 🔴 ADD THESE TWO
-  mainTitle: () => document.querySelector("#main_title_section"),
   searchForm: () => document.querySelector(".search_form_control"),
-
   searchInput: () => document.getElementById("search_input_box"),
   clearSearchBtn: () => document.getElementById("clear_search"),
 
