@@ -70,7 +70,7 @@ export const createMovieListComponent = (container, movie) => {
 
   /* ---------------- Insert Item ---------------- */
 
-  container.insertBefore(movieItem, container.firstChild);
+  container.appendChild(movieItem);
 
   /* ---------------- Favourite Button Logic ---------------- */
 

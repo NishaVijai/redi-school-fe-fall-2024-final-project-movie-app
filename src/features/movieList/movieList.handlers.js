@@ -1,15 +1,20 @@
 // src/features/movieList/movieList.handlers.js
-import { dom } from "../../utils/dom.js";
 import { fetchMovieDetails } from "../movieDetails/movieDetails.handlers.js";
-import { hide, show } from "../../utils/ui.js";
 
 export const bindMovieListClickHandlers = (parentContainer) => {
-  const movieItems =
-    parentContainer.querySelectorAll(".display_movie_list_item");
+  // Remove existing listener to avoid duplicates
+  if (parentContainer._movieListHandler) {
+    parentContainer.removeEventListener("click", parentContainer._movieListHandler);
+  }
 
-  movieItems.forEach(movie => {
-    movie.addEventListener("click", async () => {
-      await fetchMovieDetails(movie.dataset.id);
-    });
-  });
+  // Use event delegation to avoid attaching multiple listeners
+  const handler = async (e) => {
+    const movieItem = e.target.closest(".display_movie_list_item");
+    if (movieItem) {
+      await fetchMovieDetails(movieItem.dataset.id);
+    }
+  };
+
+  parentContainer.addEventListener("click", handler);
+  parentContainer._movieListHandler = handler;
 };
