@@ -1,45 +1,40 @@
+// src/components/createMovieDetailsComponent.js
 import noImage from "./public/assets/images/missingImage.svg";
 import awardImage from "./public/assets/images/award2.svg";
 
-export const createMovieDetailsComponent = (htmlContainer, movieDetails) => {
-  htmlContainer.innerHTML += `
-    <div class="search_result_container_movie_poster">
-      <img class="movie-poster" alt="poster">
+/**
+ * Render a movie's details into a given container.
+ * @param {HTMLElement} container - The parent element to insert the movie details.
+ * @param {Object} movie - Movie details from OMDb API.
+ */
+export const createMovieDetailsComponent = (container, movie) => {
+  container.innerHTML = `
+    <div class="movie_poster_container">
+      <img class="movie-poster" alt="${movie.Title} poster">
     </div>
 
-    <section class="search_result_container_movie_info">
-      <h3 class="search_result_container_movie_title">${movieDetails.Title}</h3>
+    <section class="movie_info_container">
+      <h3 class="movie_title">${movie.Title}</h3>
 
-      <ul class="search_result_container_movie_misc_info">
-        <li class="year">Year: ${movieDetails.Year}</li>
-        <li class="ratings">Ratings: ${movieDetails.Rated}</li>
-        <li class="released">Released: ${movieDetails.Released}</li>
+      <ul class="movie_misc_info">
+        <li><b>Year:</b> ${movie.Year}</li>
+        <li><b>Ratings:</b> ${movie.Rated}</li>
+        <li><b>Released:</b> ${movie.Released}</li>
       </ul>
 
-      <p class="genre"><b>Genre:</b> ${movieDetails.Genre}</p>
-      <p class="writer"><b>Writer:</b> ${movieDetails.Writer}</p>
-      <p class="actors"><b>Actors:</b> ${movieDetails.Actors}</p>
-      <p class="plot"><b>Plot:</b> ${movieDetails.Plot}</p>
-      <p class="language"><b>Language:</b> ${movieDetails.Language}</p>
-
+      <p class="genre"><b>Genre:</b> ${movie.Genre}</p>
+      <p class="writer"><b>Writer:</b> ${movie.Writer}</p>
+      <p class="actors"><b>Actors:</b> ${movie.Actors}</p>
+      <p class="plot"><b>Plot:</b> ${movie.Plot}</p>
+      <p class="language"><b>Language:</b> ${movie.Language}</p>
       <p class="awards">
-        <img src="${awardImage}" alt="Trophy"> ${movieDetails.Awards}
+        <img src="${awardImage}" alt="Award"> ${movie.Awards}
       </p>
     </section>
   `;
 
-  // ✅ Select the last inserted poster image
-  const posterImg = htmlContainer.querySelector(
-    ".movie-poster:last-of-type"
-  );
-
-  posterImg.src =
-    movieDetails.Poster && movieDetails.Poster !== "N/A"
-      ? movieDetails.Poster
-      : noImage;
-
-  posterImg.onerror = function () {
-    this.onerror = null; // prevent infinite loop
-    this.src = noImage;
-  };
+  // Poster image with fallback
+  const posterImg = container.querySelector(".movie-poster");
+  posterImg.src = movie.Poster && movie.Poster !== "N/A" ? movie.Poster : noImage;
+  posterImg.onerror = () => { posterImg.src = noImage; };
 };

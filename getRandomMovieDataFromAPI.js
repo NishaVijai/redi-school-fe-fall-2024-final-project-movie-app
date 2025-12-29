@@ -1,23 +1,18 @@
+// src/getRandomMovieDataFromAPI.js
+import { fetchMoviesBySearch, attachMovieClickHandlers } from "./api/movieAPI.js";
 import { displayMovieListComponent } from "./displayMovieListComponent.js";
+import { displaySearchResultMovieDetails } from "./displaySearchResultMovieDetails.js";
 
+/**
+ * Fetch movies by search term and render the list
+ * @param {HTMLElement} htmlContainer
+ * @param {string} inputValue
+ * @param {HTMLElement} htmlParentContainer
+ */
 export const getRandomMovieDataFromAPI = async (htmlContainer, inputValue, htmlParentContainer) => {
-  const apiUrl = import.meta.env.VITE_API_URL;
-  const apiKey = import.meta.env.VITE_API_KEY;
+  await fetchMoviesBySearch(inputValue, htmlContainer, displayMovieListComponent);
 
-  const headerElement = document.querySelector("header");
-  const loaderInfiniteSpinnerSVG = document.querySelector(".loader_infinite_spinner");
-
-  const URL = `${apiUrl}?s=${inputValue}&page=1?&apikey=${apiKey}`;
-
-  loaderInfiniteSpinnerSVG.classList.remove("hide_loader_infinite_spinner");
-  // loaderInfiniteSpinnerSVG.scrollIntoView();
-
-  await fetch(URL).then(response => response.json()).then(data => {
-    if (data.Response == "True") {
-      loaderInfiniteSpinnerSVG.classList.add("hide_loader_infinite_spinner");
-
-      displayMovieListComponent(htmlContainer, data.Search, htmlParentContainer);
-      headerElement.scrollIntoView();
-    }
-  });
+  // Attach click events to movie items for details
+  const movieListElements = htmlParentContainer.querySelectorAll(".display_movie_list_item");
+  attachMovieClickHandlers(movieListElements, htmlParentContainer, displaySearchResultMovieDetails);
 };

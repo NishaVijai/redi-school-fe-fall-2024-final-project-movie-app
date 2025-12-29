@@ -1,7 +1,7 @@
 import "./style.css";
 import github from "./public/assets/images/github.svg";
-import { startApp } from "./startApp.js";
-import Router from "./Router.js";
+import { startApp } from "./src/app/startApp.js";
+import Router from "./src/app/Router.js";
 
 const appDiv = document.getElementById("app");
 

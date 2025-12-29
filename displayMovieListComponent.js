@@ -1,9 +1,13 @@
+// src/components/displayMovieListComponent.js
 import { createMovieListComponent } from "./createMovieListComponent.js";
-import { getRandomMovieDetailsFromAPI } from "./getRandomMovieDetailsFromAPI.js";
+import { bindMovieListClickHandlers } from "./src/features/movieList/movieList.handlers.js";
+import { renderMovies } from "./src/utils/display.js";
 
-export const displayMovieListComponent = (htmlContainer, movieData, htmlParentContainer) => {
-  for (let i = 0; i < movieData.length; i++) {
-    createMovieListComponent(htmlContainer, movieData[i]);
-  };
-  getRandomMovieDetailsFromAPI(htmlParentContainer);
+export const displayMovieListComponent = (container, movies, htmlParentContainer) => {
+  // // Render movies without prepending (don't use default prepend: true)
+  // renderMovies(createMovieListComponent, container, movies, { prepend: false });
+  // // Bind handlers to the actual container where movies are rendered
+  // bindMovieListClickHandlers(container);
+  renderMovies(createMovieListComponent, container, movies);
+  bindMovieListClickHandlers(htmlParentContainer);
 };

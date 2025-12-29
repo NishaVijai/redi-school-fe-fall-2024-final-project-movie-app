@@ -1,81 +1,86 @@
+// src/components/createMovieListComponent.js
 import noImage from "./public/assets/images/missingImage.svg";
 import { displayFavouritesMovieList } from "./displayFavouritesMovieList.js";
 
 export let savedMovieIdsFromComponent = [];
 
-export const createMovieListComponent = (htmlContainer, movieData) => {
-  const movieListItem = document.createElement('div');
-  movieListItem.dataset.id = movieData.imdbID;
-  movieListItem.classList.add("display_movie_list_item");
+/**
+ * Render a movie in a list with poster, title, year, and favourite button.
+ * @param {HTMLElement} container - Parent container for the movie item.
+ * @param {Object} movie - Movie object from OMDb API (search response).
+ */
+export const createMovieListComponent = (container, movie) => {
+  const movieItem = document.createElement("div");
+  movieItem.classList.add("display_movie_list_item");
+  movieItem.dataset.id = movie.imdbID;
 
-  // ---------- Button Container ----------
-  const buttonContainerDiv = document.createElement('div');
-  buttonContainerDiv.classList.add("button_container_div");
+  /* ---------------- Favourite Button ---------------- */
 
-  const favouritesButton = document.createElement('button');
-  favouritesButton.id = "favourites";
-  favouritesButton.type = "button";
-  favouritesButton.textContent = "Favourite";
-  favouritesButton.classList.add("favorite_movie_button");
+  const buttonDiv = document.createElement("div");
+  buttonDiv.classList.add("button_container_div");
 
-  buttonContainerDiv.appendChild(favouritesButton);
-  movieListItem.appendChild(buttonContainerDiv);
+  const favButton = document.createElement("button");
+  favButton.type = "button";
+  favButton.textContent = "Favourite";
+  favButton.classList.add("favorite_movie_button");
 
-  // ---------- Image Container ----------
-  const imageContainerDiv = document.createElement('div');
-  imageContainerDiv.classList.add("movie_list_item_image");
+  buttonDiv.appendChild(favButton);
+  movieItem.appendChild(buttonDiv);
 
-  const imageElement = document.createElement("img");
-  imageElement.alt = movieData.Title;
+  /* ---------------- Poster ---------------- */
 
-  // Set poster URL with fallback for "N/A"
-  imageElement.src = movieData.Poster && movieData.Poster !== "N/A"
-    ? movieData.Poster
-    : noImage;
+  const imgDiv = document.createElement("div");
+  imgDiv.classList.add("movie_list_item_image");
 
-  // Handle broken / 404 URLs
-  imageElement.onerror = function () {
-    this.onerror = null; // prevent infinite loop
-    this.src = noImage;
+  const img = document.createElement("img");
+  img.alt = movie.Title;
+  img.src =
+    movie.Poster && movie.Poster !== "N/A"
+      ? movie.Poster
+      : noImage;
+
+  img.onerror = () => {
+    img.src = noImage;
   };
 
-  imageContainerDiv.appendChild(imageElement);
-  movieListItem.appendChild(imageContainerDiv);
+  imgDiv.appendChild(img);
+  movieItem.appendChild(imgDiv);
 
-  // ---------- Title Container ----------
-  const titleContainerDiv = document.createElement('div');
-  titleContainerDiv.classList.add("movie_list_item_title");
+  /* ---------------- Title ---------------- */
 
-  const h3Element = document.createElement("h3");
-  h3Element.textContent = movieData.Title;
+  const titleDiv = document.createElement("div");
+  titleDiv.classList.add("movie_list_item_title");
 
-  titleContainerDiv.appendChild(h3Element);
-  movieListItem.appendChild(titleContainerDiv);
+  const h3 = document.createElement("h3");
+  h3.textContent = movie.Title;
 
-  // ---------- Year Container ----------
-  const yearContainerDiv = document.createElement('div');
-  yearContainerDiv.classList.add("movie_list_item_year");
+  titleDiv.appendChild(h3);
+  movieItem.appendChild(titleDiv);
 
-  const pElement = document.createElement("p");
-  pElement.textContent = movieData.Year;
+  /* ---------------- Year ---------------- */
 
-  yearContainerDiv.appendChild(pElement);
-  movieListItem.appendChild(yearContainerDiv);
+  const yearDiv = document.createElement("div");
+  yearDiv.classList.add("movie_list_item_year");
 
-  // Insert movie item at the top
-  htmlContainer.insertBefore(movieListItem, htmlContainer.firstChild);
+  const pYear = document.createElement("p");
+  pYear.textContent = movie.Year;
 
-  // ---------- Favourite Button Logic ----------
-  favouritesButton.addEventListener('click', (e) => {
-    e.stopPropagation();
+  yearDiv.appendChild(pYear);
+  movieItem.appendChild(yearDiv);
 
-    if (!savedMovieIdsFromComponent.includes(movieListItem.dataset.id)) {
-      savedMovieIdsFromComponent.unshift(movieListItem.dataset.id);
+  /* ---------------- Insert Item ---------------- */
 
-      if (savedMovieIdsFromComponent.length > 0) {
-        favouritesButton.classList.add("favorite_movie_button_clicked");
-        displayFavouritesMovieList(movieData);
-      }
+  container.insertBefore(movieItem, container.firstChild);
+
+  /* ---------------- Favourite Button Logic ---------------- */
+
+  favButton.addEventListener("click", (e) => {
+    e.stopPropagation(); // prevent opening details
+
+    if (!savedMovieIdsFromComponent.includes(movie.imdbID)) {
+      savedMovieIdsFromComponent.unshift(movie.imdbID);
+      favButton.classList.add("favorite_movie_button_clicked");
+      displayFavouritesMovieList(movie);
     }
   });
 };
