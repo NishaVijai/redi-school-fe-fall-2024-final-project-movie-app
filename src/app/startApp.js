@@ -31,8 +31,15 @@ const renderLayout = () => {
       <img src="${infiniteSpinner}" alt="Infinite Spinner SVG" />
     </div>
 
-    <div class="display_movie_list_container"></div>
-    <div class="search_result_movies_container"></div>
+    <section class="display_default_movie_list_container">
+      <h2>Default Movie List</h2>
+      <div class="display_movie_list_container"></div>
+    </section>
+
+    <section class="display_search_result_movie_list_container">
+      <h2>Search Result</h2>
+      <div class="search_result_movies_container"></div>
+    </section>
 
     <section class="recent_movie_details_container">
       <h2>Recent Movie Details</h2>
@@ -61,7 +68,14 @@ const renderLayout = () => {
       </div>
     </section>
 
-    <div class="movie_details_container"></div>
+    <section class="display_movie_details_container">
+      <h2>Display Movie Details</h2>
+      <div class="movie_details_container">
+        <p class="movie_details_container_empty_text">
+          Please click on a movie to read more...
+        </p>
+      </div>
+    </section>
 
     <button id="goToTop">Scroll to Top</button>
   `;
@@ -75,9 +89,10 @@ let searchInputValue = "";
 
 const setupInitialVisibility = () => {
   hide(
+    dom.recentDetails(),
     dom.movieDetailsHistory(),
     dom.favourites(),
-    dom.searchResults()
+    dom.searchResultsSection()
   );
 };
 
@@ -96,10 +111,15 @@ const onSearch = () => {
   searchInputValue = dom.searchInput().value.trim();
   if (!searchInputValue) return;
 
+  // Clear previous movie details but keep the empty state message
+  const emptyText = dom.movieDetails()?.querySelector(".movie_details_container_empty_text");
   dom.movieDetails().innerHTML = "";
+  if (emptyText) {
+    dom.movieDetails().appendChild(emptyText);
+  }
 
-  hide(dom.movieList());
-  show(dom.searchResults());
+  hide(dom.defaultMovieListSection());
+  show(dom.searchResultsSection(), dom.movieDetailsSection());
   hide(dom.movieDetailsHistory(), dom.favourites());
 
   fetchMovieList(
@@ -115,10 +135,22 @@ const onClearSearch = (e) => {
 
   dom.searchInput().value = "";
   searchInputValue = "";
-  dom.movieDetails().innerHTML = "";
 
-  show(dom.movieList());
-  hide(dom.searchResults());
+  // Clear movie details but restore the empty state message
+  const emptyText = dom.movieDetails()?.querySelector(".movie_details_container_empty_text");
+  dom.movieDetails().innerHTML = "";
+  if (emptyText) {
+    dom.movieDetails().appendChild(emptyText);
+  } else {
+    // If it doesn't exist, recreate it
+    const p = document.createElement("p");
+    p.className = "movie_details_container_empty_text";
+    p.textContent = "Please click on a movie to read more...";
+    dom.movieDetails().appendChild(p);
+  }
+
+  show(dom.defaultMovieListSection());
+  hide(dom.searchResultsSection());
 };
 
 const onScroll = () => {

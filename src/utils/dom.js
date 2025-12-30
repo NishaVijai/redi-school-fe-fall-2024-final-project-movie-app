@@ -8,8 +8,14 @@ export const dom = {
   movieList: () =>
     document.querySelector(".display_movie_list_container"),
 
+  defaultMovieListSection: () =>
+    document.querySelector(".display_default_movie_list_container"),
+
   searchResults: () =>
     document.querySelector(".search_result_movies_container"),
+
+  searchResultsSection: () =>
+    document.querySelector(".display_search_result_movie_list_container"),
 
   movieDetails: () =>
     document.querySelector(".movie_details_container"),
@@ -22,6 +28,9 @@ export const dom = {
 
   recentDetails: () =>
     document.querySelector(".recent_movie_details_container"),
+
+  movieDetailsSection: () =>
+    document.querySelector(".display_movie_details_container"),
 
   goToTopBtn: () => document.getElementById("goToTop")
 };

@@ -32,21 +32,24 @@ const Router = {
     const showHome = () => {
       show(
         dom.searchForm(),
-        dom.movieDetails()
+        dom.movieDetails(),
+        dom.movieDetailsSection(),
+        dom.defaultMovieListSection()
       );
 
       hide(
         dom.recentDetails(),
         dom.movieDetailsHistory(),
-        dom.favourites()
+        dom.favourites(),
+        dom.searchResultsSection()
       );
 
       if (searchValue) {
-        hide(dom.movieList());
-        show(dom.searchResults());
+        hide(dom.defaultMovieListSection());
+        show(dom.searchResultsSection());
       } else {
-        show(dom.movieList());
-        hide(dom.searchResults());
+        show(dom.defaultMovieListSection());
+        hide(dom.searchResultsSection());
       }
     };
 
@@ -54,11 +57,12 @@ const Router = {
       show(dom.recentDetails());
       hide(
         dom.searchForm(),
-        dom.movieList(),
-        dom.searchResults(),
+        dom.defaultMovieListSection(),
+        dom.searchResultsSection(),
         dom.movieDetails(),
         dom.movieDetailsHistory(),
-        dom.favourites()
+        dom.favourites(),
+        dom.movieDetailsSection()
       );
     };
 
@@ -66,11 +70,12 @@ const Router = {
       show(dom.movieDetailsHistory());
       hide(
         dom.searchForm(),
-        dom.movieList(),
-        dom.searchResults(),
+        dom.defaultMovieListSection(),
+        dom.searchResultsSection(),
         dom.movieDetails(),
         dom.recentDetails(),
-        dom.favourites()
+        dom.favourites(),
+        dom.movieDetailsSection()
       );
     };
 
@@ -78,11 +83,12 @@ const Router = {
       show(dom.favourites());
       hide(
         dom.searchForm(),
-        dom.movieList(),
-        dom.searchResults(),
+        dom.defaultMovieListSection(),
+        dom.searchResultsSection(),
         dom.movieDetails(),
         dom.recentDetails(),
-        dom.movieDetailsHistory()
+        dom.movieDetailsHistory(),
+        dom.movieDetailsSection()
       );
 
       const emptyText = dom

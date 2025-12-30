@@ -5,6 +5,36 @@ import { displayFavouritesMovieList } from "./displayFavouritesMovieList.js";
 export let savedMovieIdsFromComponent = [];
 
 /**
+ * Update the empty state message of the favorites list
+ */
+const updateEmptyFavoritesState = () => {
+  const favoritesList = document.querySelector(".display_favourite_movie_lists");
+  const emptyText = favoritesList?.querySelector(".favorite_movie_list_empty_text");
+
+  if (emptyText) {
+    emptyText.classList.toggle(
+      "hide_element",
+      savedMovieIdsFromComponent.length !== 0
+    );
+  }
+};
+
+/**
+ * Update all favorite buttons for a specific movie across the page
+ */
+const updateAllMovieButtons = (movieId) => {
+  const allMovieItems = document.querySelectorAll(`[data-id="${movieId}"]`);
+  const isFavorited = savedMovieIdsFromComponent.includes(movieId);
+
+  allMovieItems.forEach((item) => {
+    const button = item.querySelector(".favorite_movie_button");
+    if (button) {
+      button.classList.toggle("favorite_movie_button_clicked", isFavorited);
+    }
+  });
+};
+
+/**
  * Render a movie in a list with poster, title, year, and favourite button.
  * @param {HTMLElement} container - Parent container for the movie item.
  * @param {Object} movie - Movie object from OMDb API (search response).
@@ -74,13 +104,36 @@ export const createMovieListComponent = (container, movie) => {
 
   /* ---------------- Favourite Button Logic ---------------- */
 
+  // Check if movie is already in favorites
+  if (savedMovieIdsFromComponent.includes(movie.imdbID)) {
+    favButton.classList.add("favorite_movie_button_clicked");
+  }
+
   favButton.addEventListener("click", (e) => {
     e.stopPropagation(); // prevent opening details
 
-    if (!savedMovieIdsFromComponent.includes(movie.imdbID)) {
+    const movieIndex = savedMovieIdsFromComponent.indexOf(movie.imdbID);
+
+    if (movieIndex === -1) {
+      // Add to favorites
       savedMovieIdsFromComponent.unshift(movie.imdbID);
-      favButton.classList.add("favorite_movie_button_clicked");
       displayFavouritesMovieList(movie);
+    } else {
+      // Remove from favorites
+      savedMovieIdsFromComponent.splice(movieIndex, 1);
+
+      // Remove from favorites list if exists
+      const favoritesList = document.querySelector(".display_favourite_movie_lists");
+      const favoriteItem = favoritesList?.querySelector(`[data-id="${movie.imdbID}"]`);
+      if (favoriteItem) {
+        favoriteItem.parentElement.remove();
+      }
     }
+
+    // Update all buttons for this movie across the page
+    updateAllMovieButtons(movie.imdbID);
+
+    // Update empty state
+    updateEmptyFavoritesState();
   });
 };
