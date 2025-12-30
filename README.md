@@ -5,7 +5,7 @@ OpenMovie Search is a movie discovery web app powered by the OMDb API. It enable
 https://movie-details-api-search.netlify.app/
 
 ## Screenshot
-![MovieDetailsAPIsearchAppNew](https://github.com/user-attachments/assets/63732d14-f164-49d8-9aca-09070e27b227)
+<img width="3840" height="4470" alt="OpenMovie Search Web App" src="https://github.com/user-attachments/assets/0a8206ef-5575-4cf2-8bf4-fcab37f20311" />
 
 ## Run project locally
  - npm install
